@@ -1,0 +1,5 @@
+Pour la base de données: ProjetGithub
+projets(id, nom, description, photo)
+skills(id, nom, projet)
+requete(id, auteur, email, objet, message)
+admin(id, username, email, passwd, photo)
