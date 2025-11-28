@@ -135,7 +135,7 @@ https://templatemo.com/tm-593-personal-shape
                     <div class="portfolio-image"></div>
                     <div class="portfolio-content">
                         <h4>Dashboard Interface</h4>
-                        <p>Clean and functional dashboard design for data analytics platform with complex information architecture and real-time data visualization.</p>
+                        <p>Clean and functional Dashboard design for data analytics platform with complex information architecture and real-time data visualization.</p>
                         <div class="portfolio-tech">
                             <span class="tech-tag">Vue.js</span>
                             <span class="tech-tag">D3.js</span>
