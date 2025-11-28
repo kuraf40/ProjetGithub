@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 28 nov. 2025 à 03:20
+-- Généré le : ven. 28 nov. 2025 à 05:50
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -62,6 +62,13 @@ CREATE TABLE `projets` (
   `photo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `projets`
+--
+
+INSERT INTO `projets` (`id`, `nom`, `description`, `photo`) VALUES
+(1, 'Culture Bénin', 'Une plateforme web conçue pour faire la promotion de Bénin et sa culture.', 'uploads/projets/Plateform cultureBénin.png');
+
 -- --------------------------------------------------------
 
 --
@@ -73,6 +80,16 @@ CREATE TABLE `skills` (
   `nom` varchar(255) NOT NULL,
   `projet` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `skills`
+--
+
+INSERT INTO `skills` (`id`, `nom`, `projet`) VALUES
+(1, 'Laravel PHP', 1),
+(3, 'HTML 5', 1),
+(6, 'CSS 3', 1),
+(7, 'JS', 1);
 
 --
 -- Index pour les tables déchargées
@@ -123,13 +140,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT pour la table `projets`
 --
 ALTER TABLE `projets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Contraintes pour les tables déchargées
