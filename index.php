@@ -1,3 +1,42 @@
+<?php
+include('connexionBDD.php');
+// Alternative avec une seule requête
+try {
+    $stmt = $pdo->query("
+        SELECT 
+            p.id,
+            p.nom as projet_nom,
+            p.description,
+            p.photo,
+            s.nom as skill_nom
+        FROM projets p
+        LEFT JOIN skills s ON p.id = s.projet
+        ORDER BY p.id DESC, s.id
+    ");
+    
+    $projets = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $projetId = $row['id'];
+        
+        if (!isset($projets[$projetId])) {
+            $projets[$projetId] = [
+                'id' => $row['id'],
+                'nom' => $row['projet_nom'],
+                'description' => $row['description'],
+                'photo' => $row['photo'],
+                'competences' => []
+            ];
+        }
+        
+        if (!empty($row['skill_nom'])) {
+            $projets[$projetId]['competences'][] = $row['skill_nom'];
+        }
+    }
+    
+} catch (PDOException $e) {
+    die("Erreur: " . $e->getMessage());
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,84 +131,26 @@ https://templatemo.com/tm-593-personal-shape
         <div class="container">
             <h2 class="section-title fade-in">Œuvre en vedette</h2>
             <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-content">
-                        <h4>Culture Bénin</h4>
-                        <p>Une plateforme web conçue pour faire la promotion du Bénin et sa culture.</p>
-                        <div class="portfolio-tech">
-                            <span class="tech-tag">HTML 5</span>
-                            <span class="tech-tag">CSS 3</span>
-                            <span class="tech-tag">JS</span>
-                            <span class="tech-tag">Laravel PHP</span>
+                <?php foreach ($projets as $projet):?>
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="<?= $projet['photo'] ?>" alt="<?= htmlspecialchars($projet['nom']) ?>">
+                        </div>
+                        <div class="portfolio-content">
+                            <h4><?= htmlspecialchars($projet['nom']) ?></h4>
+                            <p><?= htmlspecialchars($projet['description']) ?></p>
+                            <div class="portfolio-tech">
+                                <?php if (!empty($projet['competences'])): ?>
+                            <?php foreach ($projet['competences'] as $competence): ?>
+                                <span class="tech-tag"><?= htmlspecialchars($competence) ?></span>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <span class="tech-tag">Aucune compétence associée pour le moment</span>
+                        <?php endif; ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-content">
-                        <h4>E-commerce Platform</h4>
-                        <p>A modern, responsive e-commerce solution with focus on user experience and conversion optimization. Built with scalability and performance in mind.</p>
-                        <div class="portfolio-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Stripe</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-content">
-                        <h4>Mobile App Design</h4>
-                        <p>Intuitive mobile app interface for a fitness tracking application with focus on accessibility and user engagement through gamification.</p>
-                        <div class="portfolio-tech">
-                            <span class="tech-tag">Figma</span>
-                            <span class="tech-tag">Principle</span>
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">Lottie</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-content">
-                        <h4>Dashboard Interface</h4>
-                        <p>Clean and functional dashboard design for data analytics platform with complex information architecture and real-time data visualization.</p>
-                        <div class="portfolio-tech">
-                            <span class="tech-tag">Vue.js</span>
-                            <span class="tech-tag">D3.js</span>
-                            <span class="tech-tag">SCSS</span>
-                            <span class="tech-tag">Chart.js</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-content">
-                        <h4>Marketing Website</h4>
-                        <p>Modern marketing website with interactive animations and optimized conversion funnels. Built for maximum performance and SEO.</p>
-                        <div class="portfolio-tech">
-                            <span class="tech-tag">Next.js</span>
-                            <span class="tech-tag">Framer Motion</span>
-                            <span class="tech-tag">Tailwind CSS</span>
-                            <span class="tech-tag">Vercel</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-content">
-                        <h4>Creative Portfolio</h4>
-                        <p>Artistic portfolio website featuring immersive galleries, smooth transitions, and creative storytelling for a digital artist.</p>
-                        <div class="portfolio-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Three.js</span>
-                            <span class="tech-tag">GSAP</span>
-                            <span class="tech-tag">WebGL</span>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
