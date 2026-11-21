@@ -774,30 +774,6 @@ https://templatemo.com/tm-593-personal-shape
             background-position: center;
         }
 
-        .portfolio-item:nth-child(1) .portfolio-image {
-            background-image: url('../images/Plateform cultureBénin.png');
-        }
-
-        .portfolio-item:nth-child(2) .portfolio-image {
-            background-image: url('../images/working-business-women.jpg');
-        }
-
-        .portfolio-item:nth-child(3) .portfolio-image {
-            background-image: url('../images/curved-display-pinky-girl.jpg');
-        }
-
-        .portfolio-item:nth-child(4) .portfolio-image {
-            background-image: url('../images/dashboard-interfaces-transparent-displays.jpg');
-        }
-
-        .portfolio-item:nth-child(5) .portfolio-image {
-            background-image: url('../images/marketing-strategy-women.jpg');
-        }
-
-        .portfolio-item:nth-child(6) .portfolio-image {
-            background-image: url('../images/portfolio-website-girl.jpg');
-        }
-
         .portfolio-image::before {
             content: '';
             position: absolute;
@@ -807,6 +783,9 @@ https://templatemo.com/tm-593-personal-shape
             bottom: 0;
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
             transition: all 0.3s ease;
+        }
+        .portfolio-image img{
+            width: 100%;
         }
 
         .portfolio-item:hover .portfolio-image::before {
@@ -1206,5 +1185,3 @@ https://templatemo.com/tm-593-personal-shape
                 padding: 0 1rem;
             }
         }
-
-Modification de farouk
